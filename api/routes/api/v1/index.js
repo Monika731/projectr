@@ -20,4 +20,20 @@ router.get('/tasks', async (req, res) => {
     res.json(tasks);
 });
 
+
+// Update a task in the database
+
+router.patch('/tasks/:id', async (req, res) => {
+    console.log(req.params.id);
+
+    // Use Mongoose schema for Task; "findOneAndUpdate"
+    const filter = { id: parseInt(req.params.id)};
+    const updateData = req.body;
+    const updatedDoc = await Task.findOneAndUpdate(filter, updateData, { new: true });
+    console.log(updatedDoc);
+
+    res.status(200);
+    res.json({ updated_task: parseInt(req.params.id)});
+});
+
 module.exports = router;

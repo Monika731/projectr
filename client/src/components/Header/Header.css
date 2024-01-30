@@ -13,3 +13,8 @@
     height: 64px;
     pointer-events: none;
 }
+
+.Header-Link {
+    color: #aaaaaa;
+    padding-left: 10px;
+}
