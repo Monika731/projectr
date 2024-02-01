@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import useTaskFetcher from 'src/hooks/useTaskFetcher';
-import axios from 'axios';
+import useTaskUpdater from 'src/hooks/useTaskUpdater';
 
 import Lane from 'src/components/Lane/Lane';
 import 'src/pages/Board/Board.css';
@@ -12,12 +12,15 @@ const lanes = [
     { id: 4, title: 'Done'}
 ]
 function Board( { apiURL} ) {
-    // Set up initial state os state variables
+    // Set up initial state as state variables
     const [tasks, setTasks] = useState([]);
     const [loading, error, taskdata] = useTaskFetcher(apiURL + '/tasks');
+
     const [modifiedTask, setModifiedTask] = useState(null);
 
-    useEffect(() => {
+    useTaskUpdater(apiURL, modifiedTask, setModifiedTask);
+
+ /*     useEffect(() => {
         console.log("I'm in the useEffect hook");
         console.log(modifiedTask);
 
@@ -41,7 +44,7 @@ function Board( { apiURL} ) {
         return () => {
             setModifiedTask(null);
         }
-    }, [apiURL, modifiedTask]);
+    }, [apiURL, modifiedTask]);  */
 
     // Event handlers for dragging
     function onDragStart(event, taskId) {
